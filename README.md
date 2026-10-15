@@ -33,7 +33,9 @@ adds the tray to Windows startup and starts it. Running it again updates or repa
 
 - `startup-off.cmd`: stop starting with Windows.
 - `startup-on.cmd`: start with Windows again.
-- Uninstall: run `startup-off.cmd`, quit the tray, delete the folder.
+- `uninstall.cmd`: stops the tray and usage panel, removes it from startup, and deletes the folder. Python, Node.js,
+  AgTop and cswap stay installed.
+- **Quit Tray** also closes the usage panel, so nothing keeps running from the folder.
 
 Startup is a plain shortcut in your Startup folder. There is no script, registry Run key or scheduled task, so
 antivirus (Bitdefender included) has nothing to quarantine.

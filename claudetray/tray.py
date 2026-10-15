@@ -29,6 +29,7 @@ import pystray
 
 from . import sessions, usage
 from .icons import make_icon
+from .install import stop_others
 from .sessions import DATA, NO_WINDOW, ROOT
 
 log = logging.getLogger("claudetray")
@@ -141,7 +142,9 @@ class Tray:
             message("AgTop is not installed. It needs Node.js (https://nodejs.org), then:\n\n"
                     "    npm i -g @ldegio/agtop", flags=0x30)
             return
-        subprocess.Popen(["cmd", "/c", "start", "AgTop", "cmd", "/k", "agtop"], creationflags=NO_WINDOW,
+        # A string, not a list: start's first QUOTED argument is the window title; unquoted, start ran
+        # "AgTop" itself with "cmd /k agtop" as its arguments. cwd=home so the console never locks this folder.
+        subprocess.Popen('cmd /d /c start "AgTop" cmd /k agtop', cwd=Path.home(), creationflags=NO_WINDOW,
                          close_fds=True)
 
     def on_save(self) -> None:
@@ -164,6 +167,7 @@ class Tray:
             sessions.resume(s)
 
     def on_quit(self, *_args) -> None:
+        stop_others()  # the usage panel and its launcher; their working folder is this one
         self.stop.set()
         self.icon.stop()
 

@@ -3,6 +3,7 @@
   python -m claudetray.install on        add the Startup shortcut
   python -m claudetray.install off       remove it
   python -m claudetray.install restart   stop any running tray from this folder, start a fresh one
+  python -m claudetray.install stop      stop the tray and usage panel
 
 Startup is a plain .lnk in the user's Startup folder pointing at pythonw in this folder's venv.
 On purpose, because Bitdefender quarantined the alternatives on the machine this came from:
@@ -54,16 +55,25 @@ def ours(p: psutil.Process) -> bool:
         return False
 
 
-def restart() -> None:
+def stop_others() -> None:
+    """Kill every tray / usage panel started from this folder, except this process and its parents
+    (the venv's python.exe is a launcher that waits on the real interpreter)."""
     me = psutil.Process()
-    keep = {me.pid} | {a.pid for a in me.parents()}  # the venv's python.exe is a launcher parent
+    keep = {me.pid} | {a.pid for a in me.parents()}
     for p in psutil.process_iter():
         if p.pid not in keep and ours(p):
-            p.kill()
+            try:
+                p.kill()
+            except psutil.Error:
+                pass
+
+
+def restart() -> None:
+    stop_others()
     subprocess.Popen([str(PYTHONW), "-m", "claudetray"], cwd=ROOT, close_fds=True,
                      creationflags=0x00000008 | NO_WINDOW)  # DETACHED_PROCESS
     print("Claude Hub Lite is running: look for its icon in the notification area.")
 
 
 if __name__ == "__main__":
-    {"on": startup_on, "off": startup_off, "restart": restart}[sys.argv[1] if len(sys.argv) > 1 else "on"]()
+    {"on": startup_on, "off": startup_off, "restart": restart, "stop": stop_others}[sys.argv[1] if len(sys.argv) > 1 else "on"]()

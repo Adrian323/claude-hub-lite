@@ -204,7 +204,7 @@ def resume(s: dict) -> None:
     title = "".join(c for c in f"Claude {s.get('name') or s['sessionId'][:8]}" if c.isalnum() or c in " .:()[]-_")
     env = {k: v for k, v in os.environ.items() if k.upper() not in _SESSION_ENV}
     subprocess.Popen(f'cmd.exe /d /c start "{title[:60]}" /D "{cwd}" cmd /k claude --resume {s["sessionId"]}',
-                     env=env, creationflags=NO_WINDOW, stdin=subprocess.DEVNULL, close_fds=True)
+                     env=env, cwd=Path.home(), creationflags=NO_WINDOW, stdin=subprocess.DEVNULL, close_fds=True)
 
 
 if __name__ == "__main__":

@@ -51,8 +51,14 @@ rem ---- start with Windows, and start now ------------------------------------
 ".venv\Scripts\python.exe" -m claudetray.install on || goto :fail
 ".venv\Scripts\python.exe" -m claudetray.install restart || goto :fail
 echo.
-echo Done. This window closes by itself.
-"%SystemRoot%\System32\timeout.exe" /t 8 >nul
+echo ============================================================
+echo  Claude Hub Lite is installed and running.
+echo  Find its icon in the system tray (bottom right of the
+echo  taskbar; click the ^^ arrow if it is hidden). Right-click it.
+echo ============================================================
+echo.
+echo Press any key to close this window.
+pause >nul
 exit /b 0
 
 :fail
