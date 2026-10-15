@@ -47,9 +47,11 @@ def startup_off() -> None:
 
 
 def ours(p: psutil.Process) -> bool:
-    """A tray or usage panel started from this folder."""
+    """A tray or usage panel started from this folder, or an AgTop window (cmd /k agtop + its node)."""
     try:
         cmd = p.cmdline()
+        if any("agtop" in a.lower() for a in cmd):
+            return True
         return "-m" in cmd and any(a.startswith("claudetray") for a in cmd) and Path(p.cwd()) == ROOT
     except (psutil.Error, OSError):
         return False

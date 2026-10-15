@@ -33,9 +33,8 @@ adds the tray to Windows startup and starts it. Running it again updates or repa
 
 - `startup-off.cmd`: stop starting with Windows.
 - `startup-on.cmd`: start with Windows again.
-- `uninstall.cmd`: stops the tray and usage panel, removes it from startup, and deletes the folder. Python, Node.js,
-  AgTop and cswap stay installed.
-- **Quit Tray** also closes the usage panel, so nothing keeps running from the folder.
+- `stop-all.cmd`: closes the tray, the usage panel and AgTop. Nothing of Claude Hub Lite keeps running.
+- **Quit Tray** does the same, so the folder can then be moved or deleted.
 
 Startup is a plain shortcut in your Startup folder. There is no script, registry Run key or scheduled task, so
 antivirus (Bitdefender included) has nothing to quarantine.
