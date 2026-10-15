@@ -21,17 +21,21 @@ The icon is green while a console is working and gray when all of them are idle.
 
 ## Install
 
-You need **Windows**, **[Python 3.10+](https://www.python.org/downloads/)** and Claude Code. For AgTop you also need
-**[Node.js](https://nodejs.org)**.
+Download this repo (green **Code** button, **Download ZIP**, unzip anywhere) and double-click **`install.cmd`**. That's it.
 
-1. Clone or download this repo to any folder you like.
-2. Double-click `install.cmd`.
+It installs anything missing through Windows' own `winget`: Python, Node.js (Windows asks once for permission),
+[AgTop](https://www.npmjs.com/package/@ldegio/agtop) and [cswap](https://github.com/realiti4/claude-swap). Then it
+adds the tray to Windows startup and starts it. Running it again updates or repairs the install and restarts the tray.
 
-The installer creates a private `.venv`, installs `pystray`, `pillow` and `psutil`, and installs AgTop if Node is present.
-It also adds a Startup shortcut, so the tray starts with Windows, and then starts the tray. Run it again after a
-`git pull` to update. Quit the tray first.
+- `startup-off.cmd`: stop starting with Windows.
+- `startup-on.cmd`: start with Windows again.
+- Uninstall: run `startup-off.cmd`, quit the tray, delete the folder.
 
-**Uninstall:** quit the tray, run `uninstall.cmd` to remove the Startup shortcut, then delete the folder.
+Startup is a plain shortcut in your Startup folder. There is no script, registry Run key or scheduled task, so
+antivirus (Bitdefender included) has nothing to quarantine.
+
+**Usage panel and cswap:** if cswap manages more than one account (`cswap add` while logged in to each), the panel
+shows them all. Click an account's name to switch to it.
 
 ## Notes
 
