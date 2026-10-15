@@ -13,6 +13,7 @@ AgTop             htop-style view of every Claude session
 Save CLI          remember which consoles are open
 Restore CLI       after a reboot, reopen them (claude --resume)
 --------------
+Source            opens this repo on GitHub
 Quit Tray
 ```
 
@@ -45,6 +46,12 @@ It also adds a Startup shortcut, so the tray starts with Windows, and then start
 - Logs are in `data\tray.log`.
 
 Self-checks: `.venv\Scripts\python -m claudetray.sessions` and `.venv\Scripts\python -m claudetray.usage --selftest`.
+
+## Contributing
+
+Changes are welcome. Fork the repo, make your change on a branch, and open a pull request against `main`.
+Run the two self-checks above before you send it. Bugs and ideas go in
+[Issues](https://github.com/Adrian323/claude-hub-lite/issues).
 
 ## License
 

@@ -8,6 +8,7 @@ Right-click menu:
   AgTop                     htop for Claude sessions (npm i -g @ldegio/agtop)
   Save CLI                  remember the open consoles
   Restore CLI               reopen the saved ones that are not open (claude --resume)
+  Source                    this project on GitHub
   Quit Tray
 
 Icon: green while any console is busy, gray otherwise. Rescans every 5 s.
@@ -20,6 +21,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import webbrowser
 from pathlib import Path
 
 import psutil
@@ -31,6 +33,7 @@ from .sessions import DATA, NO_WINDOW, ROOT
 
 log = logging.getLogger("claudetray")
 POLL_S = 5
+SOURCE = "https://github.com/Adrian323/claude-hub-lite"
 DETACHED = 0x00000008
 
 
@@ -81,6 +84,7 @@ class Tray:
             item("Save CLI", guarded(self.on_save)),
             item("Restore CLI", guarded(self.on_restore)),
             pystray.Menu.SEPARATOR,
+            item("Source", lambda: webbrowser.open(SOURCE)),
             item("Quit Tray", self.on_quit),
         )
 
