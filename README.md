@@ -21,7 +21,11 @@ The icon is green while a console is working and gray when all of them are idle.
 
 ## Install
 
-Download this repo (green **Code** button, **Download ZIP**, unzip anywhere) and double-click **`install.cmd`**. That's it.
+Download this repo (green **Code** button, **Download ZIP**) and unzip it to a location such as
+`C:\Claude Tools\Claude Hub`. That folder **is** the install: the installer does not ask where to install and
+copies nothing elsewhere, so pick the folder you want to keep. Then double-click **`install.cmd`** inside it.
+
+Moved the folder later? Run `install.cmd` again from the new place so startup points there.
 
 It installs anything missing through Windows' own `winget`: Python, Node.js (Windows asks once for permission),
 [AgTop](https://www.npmjs.com/package/@ldegio/agtop) and [cswap](https://github.com/realiti4/claude-swap). Then it
